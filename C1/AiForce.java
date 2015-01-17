@@ -30,48 +30,48 @@ public class AiForce {
 	public void solver(List<Integer> pieces, int currentPosition) {
 		
 		if (currentPosition >= pieces.size()) {
-						int filledLines = this.getFilledNumberOfLines();
+			int filledLines = this.getFilledNumberOfLines();
 						
-						if (filledLines < this.answer || this.answer == -1) {
-							this.answer = filledLines;
-						}
+			if (filledLines < this.answer || this.answer == -1) {
+				this.answer = filledLines;
+			}
 						
-						return;
-				}
+			return;
+		}
 				
-				Integer currentItem = pieces.get(currentPosition);
-				for (Line line : this.lines) {
-					if((System.currentTimeMillis()-this.startTime) > 20000) {
-						break;
-					}
+		Integer currentItem = pieces.get(currentPosition);
+		for (Line line : this.lines) {
+		if((System.currentTimeMillis()-this.startTime) > 20000) {
+			break;
+		}
 					
-						if (line.addPiece(currentItem)) {
-								this.solver(pieces, currentPosition + 1);
-								line.removePiece(currentItem);
-						}
-				}
+			if (line.addPiece(currentItem)) {
+				this.solver(pieces, currentPosition + 1);
+				line.removePiece(currentItem);
+			}
+		}
 		
 	}
 	
 	private int getFilledNumberOfLines() {
-				int lines = 0;
-				for (Line line : this.lines) {
-						if (line.numberOfPieces() != 0) {
-							lines++;
-						}
-				}
-				return lines;
+		int lines = 0;
+		for (Line line : this.lines) {
+			if (line.numberOfPieces() != 0) {
+				lines++;
+			}
 		}
+		return lines;
+	}
 	
 	public List<Line> copyLines(List<Line> lines) {
 		
-				ArrayList<Line> copy = new ArrayList<Line>();
+		ArrayList<Line> copy = new ArrayList<Line>();
 				
-				for (int i = 0; i < lines.size(); i++) {
-						copy.add(lines.get(i).copy());
-				}
-				
-				return copy;
+		for (int i = 0; i < lines.size(); i++) {
+			copy.add(lines.get(i).copy());
 		}
+				
+		return copy;
+	}
 
 }
